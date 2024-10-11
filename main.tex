@@ -1,0 +1,99 @@
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage[normalem]{ulem}
+% \usepackage{hyperref}
+\usepackage{filecontents}
+\usepackage[style=numeric,backend=biber,sorting=ydnt,maxbibnames=99]{biblatex}
+% \usepackage{hyperref}
+\AtNextBibliography{\small}
+% \AtBeginBibliography{\small}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite=false]{
+      \step[fieldsource=note]
+      \step[fieldset=addendum, origfieldval, final]
+      \step[fieldset=note, null]
+    }
+  }
+}
+
+
+
+\DeclareBibliographyCategory{mine}
+\addtocategory{mine}{companion,sigfridsson}
+\nocite{companion,sigfridsson}
+
+\newcommand{\nameuse}[1]{%
+  \def\do##1{\settoggle{blx@use##1}{#1}}%
+  \dolistcsloop{blx@datamodel@names}}
+
+\newcommand{\nameusesave}{%
+  \def\do##1{%
+    \providetoggle{blx@save@use##1}%
+    \iftoggle{blx@use##1}{\toggletrue{blx@save@use##1}}{\togglefalse{blx@save@use##1}}%
+  }%
+  \dolistcsloop{blx@datamodel@names}}
+
+\newcommand{\nameuserestore}{%
+  \def\do##1{%
+    \iftoggle{blx@save@use##1}{\toggletrue{blx@use##1}}{\togglefalse{blx@use##1}}%
+  }%
+  \dolistcsloop{blx@datamodel@names}}
+
+\nameusesave
+\nameuse{false}
+
+% Choose bibliography style for formatting list of publications
+% \usepackage[style=ieee,url=false,doi=false,maxbibnames=99,sorting=ydnt,dashed=false,direction=increasing]{biblatex}
+\bibliography{papers}
+\addbibresource{papers.bib}
+
+% Choose theme, e.g. black, RedViolet, ForestGreen, MidnightBlue
+\def\theme{MidnightBlue}
+
+% More predefined colors can be found in 
+% https://en.wikibooks.org/wiki/LaTeX/Colors
+% Example photograph taken from Wikimedia Commons
+% https://commons.wikimedia.org/wiki/File:Kiara_Krit_passport.jpg
+
+\usepackage{simplecv}
+
+\boldname{Surname}{Name}{N.}
+
+\begin{document}
+
+% Heading
+\headinginline{Jung-hun Kim}{\vspace{3mm}
+    % Website: \website{example.com} \\ 
+Email: \email{junghunkim@snu.ac.kr}\\
+ \hspace{-10mm}Website: \website{sites.google.com/view/junghunkim}
+    % LinkedIn: \linkedin{name-surname} \\
+    % GitHub: \github{example}
+}
+
+% \headingphoto{Name Surname}{
+%     Website: \website{example.com} \\ 
+%     Email: \email{example@example.edu} \\
+%     LinkedIn: \linkedin{name-surname} \\
+%     GitHub: \github{example}
+% }{photo.jpg}
+
+% Page One
+% \import{sections/}{summary.tex}
+\import{sections/}{education.tex}
+\import{sections/}{publications.tex}
+\import{sections/}{experience.tex}
+\import{sections/}{presentation.tex}
+\import{sections/}{extracurricular.tex}
+\import{sections/}{projects.tex}
+% Page Two
+% \import{sections/}{teaching.tex}
+% \import{sections/}{course.tex}
+% \sidebyside
+\import{sections/}{awards.tex}
+    % {\import{sections/}{skills.tex}}
+    % {\import{sections/}{languages.tex}}
+
+
+\end{document}
